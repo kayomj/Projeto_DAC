@@ -25,11 +25,11 @@ void grava(Aluno *aluno){
 	fprintf(op,"%s,%s,%s,%s\n",aluno->ra,aluno->nome,aluno->login,aluno->senha);
 }
 
-int verifica(char log[8], char sen[9]){
+int verifica_login(char log[8], char sen[9]){//Valida login do Aluno
 	int cont=0, validar_senha, validar_log;
 	char c, ra[8],senha[9];
 	FILE*arq;
-	arq=fopen("classe.txt","r");
+	arq=fopen("Alunos.txt","r");
 	do{
 		fseek(arq,7,SEEK_CUR);//Pula 7 posições
 		do{
@@ -50,6 +50,12 @@ int verifica(char log[8], char sen[9]){
 
 
 int main(){
-	
+	int opcao;
+	printf("Opções:\n 1)Login\n 2)Cadastra-se");
+	scanf("%d\n",&opcao);
+	switch(opcao){
+		case 1:
+
+	}
 	
 }
