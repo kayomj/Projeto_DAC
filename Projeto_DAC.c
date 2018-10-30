@@ -50,12 +50,26 @@ int verifica_login(char log[8], char sen[9]){//Valida login do Aluno
 
 
 int main(){
-	int opcao;
-	printf("Opções:\n 1)Login\n 2)Cadastra-se");
-	scanf("%d\n",&opcao);
+	int opcao, cont_op1, valida_login, sair;
+	char login_main[8], senha_main[9];
+	printf("Opções:\n 1)Login\n 2)Cadastra-se\n");
+	scanf("%d",&opcao);
 	switch(opcao){
 		case 1:
-
+			for (cont_op1=0;cont_op1<3;cont_op1++){
+				printf("Digite seu usuário:\n");
+				sgets("%s",&login_main);
+				printf("Digite sua senha:\n");
+				sgets("%s",&senha_main);
+				valida_login=(verifica_login(login_main,senha_main));
+				if (valida_login==0){
+					do{
+						printf("");
+						printf("");
+						printf("");
+					}while(sair!=1);
+				}
+			}
 	}
 	
 }
