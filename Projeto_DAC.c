@@ -51,14 +51,15 @@ void Tads_matriculando(){
 }
 
 int main(){
-char c_nome[100], c_ra[7], c_login[8], c_senha[9], c, p, tam[150], tam_1[12], codigo_d[6],ra[7], aux[6], aux_1[6], aux_2[6], percorre[6];
+int autentica;
+char login[8], senha[9], c_nome[100], c_ra[7], c_login[8], c_senha[9], c, p, tam[150], tam_1[12], codigo_d[6],ra[7], aux[6], aux_1[6], aux_2[6], percorre[6];
 Aluno *a;
 FILE *disciplina, *pre_req, ver_aluno ;
-disciplina=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Disciplinas.txt","r");
+disciplina=fopen("Disciplinas.txt","r");
 if(disciplina==NULL){
 	printf("erro na abertura do arquivo");
 }
-pre_req=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Prerequisitos.txt","r");
+pre_req=fopen("Prerequisitos.txt","r");
 		do{
 		printf("Digite seu login e senha\n");
 		scanf("%s",login);
