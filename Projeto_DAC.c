@@ -53,15 +53,11 @@ int verifica_login(char log[8], char sen[9]){//Valida login do Aluno
 }
 
 void Tads_matriculando(){
-	printf("escolha entre as opcoes");
-	printf("\n1-ralizar matricula");
-	do{
-		
-	}
+	
 }
 
 int main(){
-char c_nome[100], c_ra[7], c_login[8], c_senha[9], c, p, tam[100], tam_1[12], codigo_d[6],ra[7], aux[6], aux_1[6], aux_2[6], percorre[6];
+char c_nome[100], c_ra[7], c_login[8], c_senha[9], c, p, tam[150], tam_1[12], codigo_d[6],ra[7], aux[6], aux_1[6], aux_2[6], percorre[6];
 Aluno *a;
 FILE *disciplina, *pre_req, ver_aluno ;
 disciplina=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Disciplinas.txt","r");
@@ -74,28 +70,31 @@ pre_req=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Prerequisitos.
 		//scanf("%s",login);
 		//scanf("%s",senha);
 		//}while(verifica_login(login,senha)==0);
-			printf("1-consultar disciplina 2-cadastrar aluno");
+			printf("1-consultar disciplina 2-cadastrar aluno\n");
 			int op;
 			scanf("%d",&op);
 			//edicao solon 
 			switch(op){
-				case 1: printf("digite o codigo da disciplina");
+				case 1: printf("digite o codigo da disciplina\n");
 						scanf("%s",codigo_d);
-							fscanf(disciplina,"%s",tam);
-							for(int i=0;i<5;i++){
-								aux[i]=tam[i];
-							}
-							if(strcmp(aux,codigo_d)==0){
-								printf("Disciplina,nome,creditos: %s\n", tam);
-									fgets(tam_1,12,pre_req);
-									for(int i=0;i<=5;i++){
+							while(fscanf(disciplina,"%s",tam)){
+								for(int i=0;i<5;i++){
+									aux[i]=tam[i];
+								}
+								if(strcmp(aux,codigo_d)==0){
+									printf("Disciplina,nome,creditos: %s\n", tam);
+									while(fgets(tam_1,12,pre_req)!=NULL){
+										for(int i=0;i<=5;i++){
 										aux_1[i]=tam_1[i];
 										aux_2[i]=tam_1[i+6];
-									}
-									if(strcmp(codigo_d,aux_2)==0){
-										printf("%s e pre requisito para fazer %s", aux_1,aux_2);
-									}
+										}
+										if(strcmp(codigo_d,aux_2)==0){
+											printf("%s e pre requisito para fazer %s\n", aux_1,aux_2);
+										}
+									}		
+								}
 							}
+							
 						
 				break;	
 				case 2: printf("digite o ra o nome login e a senha");
@@ -104,7 +103,7 @@ pre_req=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Prerequisitos.
 						free(a);
 						break;
 				
-				case 3: 
+				 
 			}
 fclose(disciplina);
 }
