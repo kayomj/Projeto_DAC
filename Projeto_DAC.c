@@ -31,26 +31,18 @@ void grava(Aluno *aluno){
 	fprintf(op,"%s,%s,%s,%s\n",aluno->ra,aluno->nome,aluno->login,aluno->senha);
 }
 
-int verifica_login(char log[8], char sen[9]){//Valida login do Aluno
-	int cont=0, validar_senha, validar_login;
-	char c, login[8],senha[9];
+int verifica_login(char logx[8], char sen[9]){//Valida login do Aluno
+	int cont=0, cont_vir=0, cont_aux, tamanho;
+	char linha[100],c, *login,*senha;
 	FILE*arq;
 	arq=fopen("Alunos.txt","r");
-	do{
-		fseek(arq,7,SEEK_CUR);//Pula 7 posiÃ§Ãµes
-		do{
-			cont++;
-			c=fgetc(arq);
-		}while(c!=',');//Para na primeira virgula
-		fgets(login,7,arq);//LÃª a variÃ¡vel Login do arquivo
-		fseek(arq,1,SEEK_CUR);//Pula a virgula faltante
-		fscanf(arq,"%s",senha);
-		validar_senha=strcmp(senha,sen);
-		validar_login=strcmp(login,log);
-		if((validar_login==0 && validar_senha==0)){
-			return 0;
-		}
-	}while(c!=EOF);
+	while (fgets(linha,100,arq)){
+		strtok(linha, ",");
+		strtok(NULL, ",");
+		login=strtok(NULL, ",");
+		senha=strtok(NULL, "\n");
+		if(strcmp(logx,login)==0 && strcmp(sen,senha)==0) return 0;
+	}
 	return 1;
 }
 
@@ -67,11 +59,13 @@ if(disciplina==NULL){
 	printf("erro na abertura do arquivo");
 }
 pre_req=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Prerequisitos.txt","r");
-		//printf("Digite seu login e senha");
-		//do{
-		//scanf("%s",login);
-		//scanf("%s",senha);
-		//}while(verifica_login(login,senha)==0);
+		do{
+		printf("Digite seu login e senha\n");
+		scanf("%s",login);
+		scanf("%s",senha);
+		autentica = (verifica_login(login,senha));
+		printf("Verificou %d\n", autentica);
+	}while(autentica==1);
 			printf("1-consultar disciplina 2-cadastrar aluno\n");
 			int op;
 			scanf("%d",&op);
