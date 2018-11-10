@@ -12,9 +12,11 @@ typedef struct aluno Aluno;
 Aluno *Cadastro_aluno(){
 	Aluno *aux;
 	aux=(Aluno*)malloc(sizeof(Aluno));//Reserva espaÃ§o na memÃ³ria
-	gets(aux->ra);
+	scanf("%s",aux->ra);
 	printf("%s",aux->ra);
+	fflush(stdin);
 	fgets(aux->nome, 100, stdin);
+	fflush(stdin);
 	printf("%s",aux->nome);
 	scanf("%s",aux->login);
 	printf("%s",aux->login);
@@ -98,7 +100,7 @@ pre_req=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Prerequisitos.
 						
 				break;	
 				case 2: printf("digite o ra o nome login e a senha");
-						*a= *Cadastro_aluno();
+						a= Cadastro_aluno();
 						grava(a);
 						free(a);
 						break;
