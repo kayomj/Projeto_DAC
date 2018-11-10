@@ -9,19 +9,23 @@ struct aluno {
 typedef struct aluno Aluno;
 
 //FunÃ§Ã£o que adiciona um aluno novo
-Aluno *Cadastro_aluno(char ra[7], char nome[100], char login[8], char senha[9]){
+Aluno *Cadastro_aluno(){
 	Aluno *aux;
 	aux=(Aluno*)malloc(sizeof(Aluno));//Reserva espaÃ§o na memÃ³ria
-	strcpy(aux->ra,ra);
-	strcpy(aux->nome,nome);
-	strcpy(aux->login,login);
-	strcpy(aux->senha,senha);
+	gets(aux->ra);
+	printf("%s",aux->ra);
+	fgets(aux->nome, 100, stdin);
+	printf("%s",aux->nome);
+	scanf("%s",aux->login);
+	printf("%s",aux->login);
+	scanf("%s",aux->senha);
+	printf("%s",aux->senha);
 	return aux;
 }
 
 void grava(Aluno *aluno){
 	FILE *op;
-	op=fopen("classe.txt","a");
+	op=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\classe.txt","a");
 	fprintf(op,"%s,%s,%s,%s\n",aluno->ra,aluno->nome,aluno->login,aluno->senha);
 }
 
@@ -48,60 +52,59 @@ int verifica_login(char log[8], char sen[9]){//Valida login do Aluno
 	return 1;
 }
 
-
+void Tads_matriculando(){
+	printf("escolha entre as opcoes");
+	printf("\n1-ralizar matricula");
+	do{
+		
+	}
+}
 
 int main(){
-char login[8], senha[9], c, p, tam[100], tam_1[150], codigo_d[6],ra[7], aux[6], nome[100], percorre[6];
+char c_nome[100], c_ra[7], c_login[8], c_senha[9], c, p, tam[100], tam_1[12], codigo_d[6],ra[7], aux[6], aux_1[6], aux_2[6], percorre[6];
 Aluno *a;
-FILE *disciplina, *pre_req ;
+FILE *disciplina, *pre_req, ver_aluno ;
 disciplina=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Disciplinas.txt","r");
 if(disciplina==NULL){
 	printf("erro na abertura do arquivo");
 }
 pre_req=fopen("C:\\Users\\s092984\\Downloads\\Projeto_DAC-master\\Prerequisitos.txt","r");
-	/*do{
-		printf("Digite seu login e senha");
-		scanf("%s",login);
-		scanf("%s",senha);
-		}while(verifica_login(login,senha)==0);*/
+		//printf("Digite seu login e senha");
+		//do{
+		//scanf("%s",login);
+		//scanf("%s",senha);
+		//}while(verifica_login(login,senha)==0);
 			printf("1-consultar disciplina 2-cadastrar aluno");
 			int op;
 			scanf("%d",&op);
+			//edicao solon 
 			switch(op){
 				case 1: printf("digite o codigo da disciplina");
 						scanf("%s",codigo_d);
 							fscanf(disciplina,"%s",tam);
-							for(int i=0;i<6;i++){
+							for(int i=0;i<5;i++){
 								aux[i]=tam[i];
 							}
-							
 							if(strcmp(aux,codigo_d)==0){
-							printf("Disciplina,nome,creditos: %s", tam);
-								printf("%s",tam);
-								break;
-								fgets(tam_1,150,pre_req);
-								strtok(tam,",");
-								//if(strcmp(percorre,codigo_d)==0){
-									
-								//}
-								//break;
+								printf("Disciplina,nome,creditos: %s\n", tam);
+									fgets(tam_1,12,pre_req);
+									for(int i=0;i<=5;i++){
+										aux_1[i]=tam_1[i];
+										aux_2[i]=tam_1[i+6];
+									}
+									if(strcmp(codigo_d,aux_2)==0){
+										printf("%s e pre requisito para fazer %s", aux_1,aux_2);
+									}
 							}
-
-							else{
-								for(int i=0;p!='\n';i++){
-									p=fgetc(disciplina);
-								}
-							}
+						
 				break;	
 				case 2: printf("digite o ra o nome login e a senha");
-						scanf("%s",ra);
-						gets(nome);
-						gets(login);
-						gets(senha);
-						*a=*Cadastro_aluno(ra, nome, login, senha);
+						*a= *Cadastro_aluno();
 						grava(a);
 						free(a);
 						break;
+				
+				case 3: 
 			}
 fclose(disciplina);
 }
